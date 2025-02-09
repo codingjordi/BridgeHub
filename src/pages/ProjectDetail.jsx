@@ -479,7 +479,7 @@ export default function ProjectDetail() {
                           </div>
                           <p className="text-sm text-muted-foreground">{application.application_text}</p>
                           <p className="text-xs text-muted-foreground">
-                            Applied on {new Date(application.created_at).toLocaleDateString()}
+                            {t('project.details.applications.applied_at', { date: new Date(application.created_at).toLocaleDateString()})}
                           </p>
                         </div>
                       ))}
@@ -503,7 +503,7 @@ export default function ProjectDetail() {
                   <div className="flex items-center gap-2 text-muted-foreground">
                     <MapPin className="w-5 h-5" />
                     <div>
-                      <p className="text-foreground font-medium">{t('project.details.modality')}</p>
+                      <p className="text-foreground font-medium">{t('project.details.details.modality')}</p>
                       <p className="text-sm capitalize">{project.modality}</p>
                     </div>
                   </div>
@@ -513,7 +513,7 @@ export default function ProjectDetail() {
               {!isOwner && userProfile && (
                 hasApplied ? (
                   <div className="text-center p-4 border rounded-lg bg-muted">
-                    <p className="text-sm text-muted-foreground">You have already applied to this project</p>
+                    <p className="text-sm text-muted-foreground">{t('project.details.apply.already')}</p>
                   </div>
                 ) : (
                   <button

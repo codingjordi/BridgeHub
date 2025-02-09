@@ -158,7 +158,7 @@ export default function Profile() {
               className="absolute bottom-0 right-4 transform translate-y-1/2 btn-gradient text-white inline-flex items-center justify-center rounded-md text-sm font-medium h-10 px-4"
             >
               <Edit2 className="w-4 h-4 mr-2" />
-              Edit Profile
+              {t('profile.edit')}
             </button>
           )}
         </div>
@@ -274,7 +274,7 @@ export default function Profile() {
                     <Briefcase className="w-5 h-5 mr-2 text-[hsl(var(--accent-purple))]" />
                     <div>
                       <p className="text-2xl font-bold">0</p>
-                      <p className="text-sm text-muted-foreground">Projects</p>
+                      <p className="text-sm text-muted-foreground">{t('profile.projects')}</p>
                     </div>
                   </div>
                 </div>
@@ -283,7 +283,7 @@ export default function Profile() {
                     <Users className="w-5 h-5 mr-2 text-[hsl(var(--accent-blue))]" />
                     <div>
                       <p className="text-2xl font-bold">0</p>
-                      <p className="text-sm text-muted-foreground">Collaborations</p>
+                      <p className="text-sm text-muted-foreground">{t('profile.collaborations')}</p>
                     </div>
                   </div>
                 </div>
@@ -292,7 +292,7 @@ export default function Profile() {
                     <Star className="w-5 h-5 mr-2 text-[hsl(var(--accent-cyan))]" />
                     <div>
                       <p className="text-2xl font-bold">0</p>
-                      <p className="text-sm text-muted-foreground">Rating</p>
+                      <p className="text-sm text-muted-foreground">{t('profile.rating')}</p>
                     </div>
                   </div>
                 </div>

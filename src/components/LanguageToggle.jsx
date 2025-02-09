@@ -18,7 +18,8 @@ export function LanguageToggle() {
     <Select value={i18n.language} onValueChange={handleLanguageChange}>
       <SelectTrigger className="border-none bg-transparent hover:bg-transparent focus:ring-0 focus-visible:ring-0 focus:ring-offset-0 focus-visible:ring-offset-0">
         <SelectValue>
-          {i18n.language.toUpperCase()}
+          {/* Show the two first letters of the language */}
+          {i18n.language.toUpperCase().slice(0,2)}
         </SelectValue>
       </SelectTrigger>
       <SelectContent>

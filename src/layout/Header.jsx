@@ -70,7 +70,7 @@ export default function Header() {
           {user ? (
             <div className="flex items-center gap-2">
               <LanguageToggle />
-              <ThemeToggle />
+                <ThemeToggle />
               <div className="p-[2px] rounded-full bg-gradient-to-r from-[hsl(var(--accent-purple))] to-[hsl(var(--accent-blue))]">
                 <img
                   src={user.user_metadata.avatar_url || defaultAvatarUrl}

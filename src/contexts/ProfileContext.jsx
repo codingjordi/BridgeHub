@@ -1,11 +1,10 @@
-import { useState, createContext } from "react";
+import { useState, createContext, useEffect } from "react";
 import { supabase } from '@/services/supabase'
 import { useAuth } from "@/hooks/useAuth";
 
 export const ProfileContext = createContext(null);
 
 export function ProfileProvider({children}) {
-
     const [userProfile, setUserProfile] = useState(null);
     const [isLoading, setIsLoading] = useState(true);
     const {user} = useAuth()
@@ -34,7 +33,9 @@ export function ProfileProvider({children}) {
         }
     };
 
-    
+    useEffect(() => {
+        fetchUserProfile();
+    }, [user]);
 
     return (
         <ProfileContext.Provider value={{userProfile, fetchUserProfile, isLoading}}>

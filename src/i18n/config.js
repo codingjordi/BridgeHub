@@ -76,6 +76,12 @@ i18n
           "authenticatedHome.recommendedProjects.match": "match",
           "authenticatedHome.recommendedProjects.viewProject": "View Project",
 
+          // Profile
+          "profile.edit" : "Edit profile",
+          "profile.projects" : "Projects",
+          "profile.collaborations" : "Collaborations",
+          "profile.rating" : "Rating",
+
           // Projects
           "projects.title": "Projects",
           "projects.create": "Create Project",
@@ -100,13 +106,17 @@ i18n
           "project.details.required.skills" : "Required Skills",
           "project.details.team.members" : "Team Members",
           "project.details.team.empty" : "No team members yet",
-          "project.details.apply": "Apply to Project",
+          "project.details.applications.apply": "Apply to Project",
+          "project.details.apply.already": "You have already applied to this project",
           "project.details.applications" : "Applications",
           "project.details.applications.empty" : "No applications yet",
           "project.details.applications.accept" : "Accept",
           "project.details.applications.reject" : "Reject",
           "project.details.max.members" : "Up to {{max_members}} members",
-          "project.details.modality": "Modality",
+          "project.details.details.title" : "Details",
+          "project.details.details.team.size" : "Team Size",
+          "project.details.details.max.members" : "Up to {{max_members}} members",
+          "project.details.details.modality": "Modality",
           "project.details.applications.modal.title": "Tell the project owner why you would be a good fit for this project",
           "project.details.applications.modal.submit": "Submit Application",
           "project.details.applications.modal.cancel": "Cancel",
@@ -114,6 +124,9 @@ i18n
           "project.details.applications.modal.text.placeholder": "Describe your experience, your knowladge and why you're interested in this project...",
           "project.details.applications.modal.text.label": "Your Application",
           "project.details.applications.sign.in": "Sign in now",
+          "project.details.applications.applied_at": 'Applied on {{date}}',
+          
+
 
 
           // Home - Hero
@@ -276,6 +289,12 @@ i18n
           "authenticatedHome.recommendedProjects.match": "coincidencia",
           "authenticatedHome.recommendedProjects.viewProject": "Ver Proyecto",
 
+          // Profile
+          "profile.edit" : "Editar perfil",
+          "profile.projects" : "Proyectos",
+          "profile.collaborations" : "Colaboraciones",
+          "profile.rating" : "Puntuación",
+
           // Projects
           "projects.title": "Proyectos",
           "projects.create": "Crear Proyecto",
@@ -313,6 +332,7 @@ i18n
           "project.details.applications.modal.text.label": "Tu aplicación",
           "project.details.applications.modal.title": "Aplica al Proyecto",
           "project.details.applications.modal.description": "Cuéntale al propietario del proyecto por qué serías un buen candidato para este proyecto",
+          "project.details.applications.applied_at": 'Aplicado el {{date}}',
           
 
 
@@ -324,6 +344,7 @@ i18n
             "project.details.team.members": "Miembros del Equipo",
             "project.details.team.empty": "Aún no hay miembros en el equipo",
             "project.details.applications.apply": "Aplicar al Proyecto",
+            "project.details.apply.already": "Ya has aplicado a este proyecto",
             "project.details.applications": "Aplicaciones",
             "project.details.applications.empty": "Aún no hay aplicaciones",
             "project.details.applications.accept": "Aceptar",
@@ -331,7 +352,7 @@ i18n
             "project.details.details.title": "Detalles",
             "project.details.details.team.size": "Equipo",
             "project.details.details.max.members": "Hasta {{max_members}} miembros",
-            "project.details.modality": "Modalidad",
+            "project.details.details.modality": "Modalidad",
             "project.details.applications.modal.submit": "Enviar Solicitud",
             "project.details.applications.modal.cancel": "Cancelar",
             "project.details.applications.modal.submitting": "Enviando...",

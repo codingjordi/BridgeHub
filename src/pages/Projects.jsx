@@ -7,7 +7,6 @@ import ProjectCard from '@/components/ProjectCard';
 
 export default function Projects() {
   const { t } = useTranslation();
-  // const navigate = useNavigate();
   const [projects, setProjects] = useState([]);
   const [loading, setLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState('');
@@ -91,7 +90,7 @@ export default function Projects() {
           </Link>
         </div>
 
-        {/* Filters */}
+        {/* Filterzz */}
         <div className="flex gap-4 mb-8">
           <div className="flex-1">
             <div className="relative">
