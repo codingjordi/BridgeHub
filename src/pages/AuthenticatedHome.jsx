@@ -1,6 +1,6 @@
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
-import { useAuth } from '@/contexts/AuthContext';
+import { useAuth } from '@/hooks/useAuth';
 import { 
   Activity, 
   Clock, 
@@ -12,81 +12,23 @@ import {
   CheckCircle2,
   Clock4
 } from 'lucide-react';
+import {stats,
+  activeProjects,
+  recentActivity,
+  recommendedProjects} from '@/lib/mock-data';
+import { StatCard } from '@/components/StatCard';
 
 export default function AuthenticatedHome() {
   const { t } = useTranslation();
   const { user } = useAuth();
   const userName = user?.user_metadata?.full_name?.split(' ')[0] || 'User';
 
-  // Datos de ejemplo
-  const stats = {
-    completedProjects: 5,
-    contributedHours: 120,
-    teamworkRating: 4.8,
-    skillsGained: 12
-  };
-
-  const activeProjects = [
-    {
-      id: 1,
-      title: "E-commerce Platform",
-      role: "Frontend Developer",
-      progress: 75,
-      nextDeadline: "2024-03-15",
-      unreadMessages: 3
-    },
-    {
-      id: 2,
-      title: "Social Media Dashboard",
-      role: "UI/UX Designer",
-      progress: 40,
-      nextDeadline: "2024-03-20",
-      unreadMessages: 0
-    }
-  ];
-
-  const recentActivity = [
-    {
-      id: 1,
-      message: "Completed milestone: User Authentication",
-      project: "E-commerce Platform",
-      time: "2 hours ago"
-    },
-    {
-      id: 2,
-      message: "New comment on your design proposal",
-      project: "Social Media Dashboard",
-      time: "5 hours ago"
-    },
-    {
-      id: 3,
-      message: "Team meeting scheduled",
-      project: "E-commerce Platform",
-      time: "1 day ago"
-    }
-  ];
-
-  const recommendedProjects = [
-    {
-      id: 1,
-      title: "AI-Powered Task Manager",
-      description: "Building a smart task management system with ML capabilities",
-      matchScore: 95,
-      technologies: ["React", "Python", "TensorFlow"]
-    },
-    {
-      id: 2,
-      title: "Mobile Fitness App",
-      description: "Creating a cross-platform fitness tracking application",
-      matchScore: 88,
-      technologies: ["React Native", "Node.js", "MongoDB"]
-    }
-  ];
+  /* Mock data  */
+  
 
   return (
     <div className="min-h-screen bg-background py-8 px-4">
       <div className="max-w-7xl mx-auto space-y-8">
-        {/* Welcome Section */}
         <div className="relative overflow-hidden rounded-lg border bg-card text-card-foreground p-8">
           <div className="hero-grid absolute inset-0"></div>
           <div className="relative">
@@ -138,7 +80,6 @@ export default function AuthenticatedHome() {
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          {/* Active Projects */}
           <div className="lg:col-span-2 space-y-6">
             <div className="flex justify-between items-center">
               <h2 className="text-2xl font-bold">{t('authenticatedHome.activeProjects.title')}</h2>
@@ -194,7 +135,6 @@ export default function AuthenticatedHome() {
             </div>
           </div>
 
-          {/* Recent Activity */}
           <div className="space-y-6">
             <h2 className="text-2xl font-bold">{t('authenticatedHome.recentActivity.title')}</h2>
             <div className="feature-card rounded-lg border bg-card text-card-foreground p-6">
@@ -217,7 +157,6 @@ export default function AuthenticatedHome() {
           </div>
         </div>
 
-        {/* Recommended Projects */}
         <div className="space-y-6">
           <h2 className="text-2xl font-bold">{t('authenticatedHome.recommendedProjects.title')}</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">

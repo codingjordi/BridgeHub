@@ -1,7 +1,7 @@
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
-import { ThemeToggle } from './theme-toggle';
-import { FooterLanguageToggle } from './FooterLanguageToggle';
+import { ThemeToggle } from '../components/ThemeToggle';
+import { FooterLanguageToggle } from '../components/FooterLanguageToggle';
 
 export function Footer() {
   const { t } = useTranslation();
@@ -10,6 +10,7 @@ export function Footer() {
     <footer className="border-t bg-background">
       <div className="max-w-7xl mx-auto px-6 py-12">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-8">
+          
           {/* Company */}
           <div>
             <h3 className="font-semibold mb-3">{t('footer.company')}</h3>
@@ -113,7 +114,7 @@ export function Footer() {
               {t('footer.copyright')}
             </p>
             <p className="text-sm text-muted-foreground">
-              {t('footer.madeWith')}
+              {t('footer.madeBy')}
             </p>
           </div>
         </div>

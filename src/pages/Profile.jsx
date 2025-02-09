@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { useAuth } from '@/contexts/AuthContext';
-import { supabase } from '@/lib/supabase';
+import { useAuth } from '@/hooks/useAuth';
+import { supabase } from '@/services/supabase';
 import { Github, Linkedin, Disc as Discord, Edit2, Calendar, MapPin, Link as LinkIcon, Star, Users, Briefcase } from 'lucide-react';
 import { useToast } from "@/components/ui/use-toast";
 
@@ -145,11 +145,12 @@ export default function Profile() {
           <div className="absolute bottom-0 left-8 transform translate-y-1/2">
             <div className="p-1 rounded-full bg-gradient-to-r from-[hsl(var(--accent-purple))] to-[hsl(var(--accent-blue))]">
               <img
-                src={profile.avatar_url || "https://avvekmzjzxuqnrrxgukg.supabase.co/storage/v1/object/public/public_bucket/space_invader_icon.png"}
+                src={profile.avatar_url}
                 alt={profile.full_name}
                 className="w-32 h-32 rounded-full border-4 border-background"
               />
             </div>
+            
           </div>
           {isOwner && !isEditing && (
             <button
@@ -163,7 +164,7 @@ export default function Profile() {
         </div>
 
         {/* Profile Info */}
-        <div className="space-y-6">
+        <div className="space-y-8">
           {isEditing ? (
             <div className="space-y-4">
               <input
@@ -227,21 +228,10 @@ export default function Profile() {
             </div>
           ) : (
             <>
-              <div>
-                <h1 className="text-3xl font-bold">{profile.full_name}</h1>
+              <div className=''>
+                <h1 className="text-3xl font-bold pt-3">{profile.full_name}</h1>
                 <p className="text-muted-foreground">@{profile.username}</p>
               </div>
-
-              {profile.header && (
-                <h2 className="text-xl font-semibold text-[hsl(var(--accent-purple))]">
-                  {profile.header}
-                </h2>
-              )}
-
-              {profile.bio && (
-                <p className="text-lg">{profile.bio}</p>
-              )}
-
               <div className="flex flex-wrap gap-4">
                 {profile.linkedin_url && (
                   <a
@@ -281,7 +271,7 @@ export default function Profile() {
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                 <div className="feature-card rounded-lg border bg-card p-4">
                   <div className="flex items-center gap-2">
-                    <Briefcase className="w-5 h-5 text-[hsl(var(--accent-purple))]" />
+                    <Briefcase className="w-5 h-5 mr-2 text-[hsl(var(--accent-purple))]" />
                     <div>
                       <p className="text-2xl font-bold">0</p>
                       <p className="text-sm text-muted-foreground">Projects</p>
@@ -290,7 +280,7 @@ export default function Profile() {
                 </div>
                 <div className="feature-card rounded-lg border bg-card p-4">
                   <div className="flex items-center gap-2">
-                    <Users className="w-5 h-5 text-[hsl(var(--accent-blue))]" />
+                    <Users className="w-5 h-5 mr-2 text-[hsl(var(--accent-blue))]" />
                     <div>
                       <p className="text-2xl font-bold">0</p>
                       <p className="text-sm text-muted-foreground">Collaborations</p>
@@ -299,7 +289,7 @@ export default function Profile() {
                 </div>
                 <div className="feature-card rounded-lg border bg-card p-4">
                   <div className="flex items-center gap-2">
-                    <Star className="w-5 h-5 text-[hsl(var(--accent-cyan))]" />
+                    <Star className="w-5 h-5 mr-2 text-[hsl(var(--accent-cyan))]" />
                     <div>
                       <p className="text-2xl font-bold">0</p>
                       <p className="text-sm text-muted-foreground">Rating</p>
@@ -307,6 +297,20 @@ export default function Profile() {
                   </div>
                 </div>
               </div>
+
+              {profile.header && (
+                <h2 className="text-xl font-semibold text-[hsl(var(--accent-purple))]">
+                  {profile.header}
+                </h2>
+              )}
+
+              {profile.bio && (
+                <p className="text-lg">{profile.bio}</p>
+              )}
+
+              
+
+              
             </>
           )}
         </div>

@@ -14,16 +14,18 @@ i18n
     resources: {
       en: {
         translation: {
-          // Common
+          // Navbar
           "app.name": "BridgeHub",
           "app.auth.signIn": "Sign In",
           "app.auth.createAccount": "Create Account",
           "app.menu.greeting": "Hello, {{name}}!",
+          "app.menu.profile": "My profile",
+          "app.menu.explore": "Explore projects",
           "app.menu.settings": "Settings",
           "app.menu.support": "Support",
           "app.menu.signOut": "Sign Out",
 
-          // Auth page
+          // Auth 🔐
           "auth.welcome": "Welcome to BridgeHub",
           "auth.loginDescription": "Sign in to continue",
           "auth.registerDescription": "Create an account to get started",
@@ -44,8 +46,15 @@ i18n
           "auth.error.passwordMatch": "Passwords do not match",
           "auth.error.acceptTerms": "You must accept the terms and conditions",
           "auth.error.emailVerification": "Please check your email to verify your account",
+          "auth.error.invalidEmail": "Invalid email address",
+          "auth.error.passwordLength": "Password must be at least 6 characters",
+          "auth.error.passwordUppercase": "Password must contain at least one uppercase letter",
+          "auth.error.passwordNumber": "Password must contain at least one number",
+          "auth.error.fullNameLength": "Full name must be at least 2 characters",
+          "auth.error.usernameLength": "Username must be at least 3 characters",
+          "auth.error.usernameFormat": "Username can only contain letters, numbers and underscores",
 
-          // Authenticated Home
+          // AuthenticatedHome
           "authenticatedHome.welcome": "Welcome back, {{name}}!",
           "authenticatedHome.summary": "Here's what's happening with your projects",
           
@@ -84,13 +93,36 @@ i18n
           "projects.filter.options.node": "Node.js",
           "projects.filter.options.python": "Python",
 
-          // Hero
+          // Project details
+          "project.details.back" : "Back to Projects",
+          "project.details.edit" : "Edit Project",
+          "project.details.description" : "Description",
+          "project.details.required.skills" : "Required Skills",
+          "project.details.team.members" : "Team Members",
+          "project.details.team.empty" : "No team members yet",
+          "project.details.apply": "Apply to Project",
+          "project.details.applications" : "Applications",
+          "project.details.applications.empty" : "No applications yet",
+          "project.details.applications.accept" : "Accept",
+          "project.details.applications.reject" : "Reject",
+          "project.details.max.members" : "Up to {{max_members}} members",
+          "project.details.modality": "Modality",
+          "project.details.applications.modal.title": "Tell the project owner why you would be a good fit for this project",
+          "project.details.applications.modal.submit": "Submit Application",
+          "project.details.applications.modal.cancel": "Cancel",
+          "project.details.applications.modal.submitting": "Submitting...",
+          "project.details.applications.modal.text.placeholder": "Describe your experience, your knowladge and why you're interested in this project...",
+          "project.details.applications.modal.text.label": "Your Application",
+          "project.details.applications.sign.in": "Sign in now",
+
+
+          // Home - Hero
           "hero.title": "Build Your Portfolio with Real Projects",
           "hero.description": "Connect with other developers, designers, and tech enthusiasts to create meaningful projects and gain real experience.",
           "hero.explore": "Explore Projects",
           "hero.start": "Get Started",
 
-          // Features
+          // Home - Features
           "features.title": "Why Choose BridgeHub?",
           "features.realExperience.title": "Real Experience",
           "features.realExperience.description": "Work on projects that matter and gain hands-on experience in a collaborative environment.",
@@ -99,7 +131,7 @@ i18n
           "features.portfolio.title": "Build your Portfolio",
           "features.portfolio.description": "Create impressive projects that demonstrate your skills to potential employers.",
 
-          // How It Works
+          // Home - How It Works
           "howItWorks.title": "How It Works",
           "howItWorks.step1.title": "Create Your Profile",
           "howItWorks.step1.description": "Sign up and tell us about your skills and interests.",
@@ -108,23 +140,27 @@ i18n
           "howItWorks.step3.title": "Start Building",
           "howItWorks.step3.description": "Collaborate with others and bring ideas to life.",
 
-          // Benefits
-          "benefits.title": "Why Join Us?",
-          "benefits.practical.title": "Practical Experience",
-          "benefits.practical.description": "Work on real projects and build a strong portfolio.",
-          "benefits.networking.title": "Network Growth",
-          "benefits.networking.description": "Connect with like-minded professionals and expand your network.",
-          "benefits.portfolio.title": "Portfolio Building",
-          "benefits.portfolio.description": "Create a compelling portfolio that showcases your skills.",
-          "benefits.learning.title": "Continuous Learning",
-          "benefits.learning.description": "Learn from peers and stay up-to-date with industry trends.",
+          // Home - Benefits
+          
+          /* cambiarlo por algo como benefits.benefit${benefitNumber}.title */
+          /* cambiarlo por algo como benefits.benefit${benefitNumber}.description */
 
-          // CTA
+          "benefits.title": "Why Choose BridgeHub?",
+          "benefits.benefit1.title": "Practical Experience",
+          "benefits.benefit1.description": "Work on real projects and build a strong portfolio.",
+          "benefits.benefit2.title": "Network Growth",
+          "benefits.benefit2.description": "Connect with like-minded professionals and expand your network.",
+          "benefits.benefit3.title": "Portfolio Building",
+          "benefits.benefit3.description": "Create a compelling portfolio that showcases your skills.",
+          "benefits.benefit4.title": "Continuous Learning",
+          "benefits.benefit4.description": "Learn from peers and stay up-to-date with industry trends.",
+
+          // Home - CTA
           "cta.title": "Ready to Start Your Journey?",
           "cta.description": "Join our community of developers and start building amazing projects today.",
           "cta.button": "Join Now",
 
-          // Footer
+          // Footer 🦶
           "footer.company": "Company",
           "footer.about": "About",
           "footer.careers": "Careers",
@@ -148,7 +184,7 @@ i18n
           "footer.language": "Language",
           
           "footer.copyright": "© 2024 BridgeHub. All rights reserved.",
-          "footer.madeWith": "Made with ❤️ by developers for developers",
+          "footer.madeBy": "Made with ❤️ by developers for developers",
 
           // Create Project
           "createProject.title": "Create Project",
@@ -169,21 +205,27 @@ i18n
           "createProject.success.description": "Your project has been created successfully",
           "createProject.error.title": "Error",
           "createProject.error.description": "There was an error creating your project. Please try again.",
-          "createProject.error.requiredFields": "Please fill in all required fields"
+          "createProject.error.requiredFields": "Please fill in all required fields",
+
+          // Not Found ⚠️
+          "notFound.title": "Page Not Found",
+          "notFound.description": "The page you're looking for doesn't exist or has been moved.",
         }
       },
       es: {
         translation: {
-          // Común
+          // Cabecera
           "app.name": "BridgeHub",
           "app.auth.signIn": "Iniciar Sesión",
           "app.auth.createAccount": "Crear Cuenta",
           "app.menu.greeting": "¡Hola, {{name}}!",
+          "app.menu.profile": "Mi perfil",
+          "app.menu.explore": "Explorar proyectos",
           "app.menu.settings": "Configuración",
           "app.menu.support": "Soporte",
           "app.menu.signOut": "Cerrar Sesión",
 
-          // Auth page
+          // Auth
           "auth.welcome": "Bienvenido a BridgeHub",
           "auth.loginDescription": "Inicia sesión para continuar",
           "auth.registerDescription": "Crea una cuenta para empezar",
@@ -204,8 +246,15 @@ i18n
           "auth.error.passwordMatch": "Las contraseñas no coinciden",
           "auth.error.acceptTerms": "Debes aceptar los términos y condiciones",
           "auth.error.emailVerification": "Por favor, verifica tu correo electrónico",
+          "auth.error.invalidEmail": "Dirección de correo electrónico inválida",
+          "auth.error.passwordLength": "La contraseña debe tener al menos 6 caracteres",
+          "auth.error.passwordUppercase": "La contraseña debe contener al menos una letra mayúscula",
+          "auth.error.passwordNumber": "La contraseña debe contener al menos un número",
+          "auth.error.fullNameLength": "El nombre completo debe tener al menos 2 caracteres",
+          "auth.error.usernameLength": "El nombre de usuario debe tener al menos 3 caracteres",
+          "auth.error.usernameFormat": "El nombre de usuario solo puede contener letras, números y guiones bajos",
 
-          // Authenticated Home
+          // AuthenticatedHome
           "authenticatedHome.welcome": "¡Bienvenido de nuevo, {{name}}!",
           "authenticatedHome.summary": "Esto es lo que está pasando con tus proyectos",
           
@@ -244,14 +293,67 @@ i18n
           "projects.filter.options.node": "Node.js",
           "projects.filter.options.python": "Python",
 
-          // Hero
+          // Project details
+          "project.details.back" : "Volver a Proyectos",
+          "project.details.edit" : "Editar Proyecto",
+          "project.details.description" : "Descripción",
+          "project.details.required.skills" : "Habilidades Requeridas",
+          "project.details.team.members" : "Miembros del Equipo",
+          "project.details.team.empty" : "No hay miembros en el equipo todavía",
+          "project.details.apply": "Aplicar al Proyecto",
+          "project.details.applications" : "Aplicaciones",
+          "project.details.applications.empty" : "No hay aplicaciones todavía",
+          "project.details.applications.accept" : "Aceptar",
+          "project.details.applications.reject" : "Rechazar",
+          "project.details.max.members" : "Hasta {{max_members}} miembros",
+          "project.details.modality": "Modalidad",
+          "project.details.applications.modal.submit": "Enviar Aplicación",
+          "project.details.applications.modal.submitting": "Enviando...",
+          "project.details.applications.modal.text.placeholder": "Describe tu experiencia, tus conocimientos y por qué te interesa este proyecto...",
+          "project.details.applications.modal.text.label": "Tu aplicación",
+          "project.details.applications.modal.title": "Aplica al Proyecto",
+          "project.details.applications.modal.description": "Cuéntale al propietario del proyecto por qué serías un buen candidato para este proyecto",
+          
+
+
+          // Project details
+            "project.details.back": "Volver a Proyectos",
+            "project.details.edit": "Editar Proyecto",
+            "project.details.description": "Descripción",
+            "project.details.required.skills": "Habilidades Requeridas",
+            "project.details.team.members": "Miembros del Equipo",
+            "project.details.team.empty": "Aún no hay miembros en el equipo",
+            "project.details.applications.apply": "Aplicar al Proyecto",
+            "project.details.applications": "Aplicaciones",
+            "project.details.applications.empty": "Aún no hay aplicaciones",
+            "project.details.applications.accept": "Aceptar",
+            "project.details.applications.reject": "Rechazar",
+            "project.details.details.title": "Detalles",
+            "project.details.details.team.size": "Equipo",
+            "project.details.details.max.members": "Hasta {{max_members}} miembros",
+            "project.details.modality": "Modalidad",
+            "project.details.applications.modal.submit": "Enviar Solicitud",
+            "project.details.applications.modal.cancel": "Cancelar",
+            "project.details.applications.modal.submitting": "Enviando...",
+            "project.details.applications.text.placeholder": "Describe tu experiencia, tus conocimientos y por qué te interesa este proyecto...",
+            "project.details.applications.text.label": "Tu Solicitud",
+            "project.details.applications.title": "Cuéntale al propietario del proyecto por qué serías unx buenx candidatx para este proyecto",
+            "project.details.applications.sign.in.title": "Inicia sesión para poder aplicar",
+            "project.details.applications.sign.in.button": "Inicia sesión ahora",
+    
+
+            
+          
+
+
+          // Home - Hero
           "hero.title": "Construye tu Portafolio con Proyectos Reales",
           "hero.description": "Conéctate con otros desarrolladores, diseñadores y entusiastas de la tecnología para crear proyectos significativos y ganar experiencia real.",
           "hero.explore": "Explorar Proyectos",
           "hero.start": "Comenzar",
 
-          // Features
-          "features.title": "¿Por qué elegir BridgeHub?",
+          // Home - Features
+          "features.title": "?",
           "features.realExperience.title": "Experiencia Real",
           "features.realExperience.description": "Trabaja en proyectos que importan y gana experiencia práctica en un ambiente colaborativo.",
           "features.connect.title": "Conecta con Otros",
@@ -259,7 +361,7 @@ i18n
           "features.portfolio.title": "Construye tu Portafolio",
           "features.portfolio.description": "Crea proyectos impresionantes que demuestren tus habilidades a potenciales empleadores.",
 
-          // How It Works
+          // Home - How It Works
           "howItWorks.title": "¿Cómo Funciona?",
           "howItWorks.step1.title": "Crea tu Perfil",
           "howItWorks.step1.description": "Regístrate y cuéntanos sobre tus habilidades e intereses.",
@@ -268,18 +370,18 @@ i18n
           "howItWorks.step3.title": "Empieza a Construir",
           "howItWorks.step3.description": "Colabora con otros y da vida a las ideas.",
 
-          // Benefits
-          "benefits.title": "¿Por qué Unirte?",
-          "benefits.practical.title": "Experiencia Práctica",
-          "benefits.practical.description": "Trabaja en proyectos reales y construye un portafolio sólido.",
-          "benefits.networking.title": "Crecimiento de Red",
-          "benefits.networking.description": "Conéctate con profesionales afines y expande tu red.",
-          "benefits.portfolio.title": "Construcción de Portafolio",
-          "benefits.portfolio.description": "Crea un portafolio convincente que muestre tus habilidades.",
-          "benefits.learning.title": "Aprendizaje Continuo",
-          "benefits.learning.description": "Aprende de tus compañeros y mantente al día con las tendencias de la industria.",
+          // Home - Benefits
+          "benefits.title": "¿Por qué elegir BridgeHub?",
+          "benefits.benefit1.title": "Experiencia Práctica",
+          "benefits.benefit1.description": "Trabaja en proyectos reales y construye un portafolio sólido.",
+          "benefits.benefit2.title": "Crecimiento de Red",
+          "benefits.benefit2.description": "Conéctate con profesionales afines y expande tu red.",
+          "benefits.benefit3.title": "Construcción de Portafolio",
+          "benefits.benefit3.description": "Crea un portafolio convincente que muestre tus habilidades.",
+          "benefits.benefit4.title": "Aprendizaje Continuo",
+          "benefits.benefit4.description": "Aprende de tus compañeros y mantente al día con las tendencias de la industria.",
 
-          // CTA
+          // Home - CTA
           "cta.title": "¿Listo para Comenzar tu Viaje?",
           "cta.description": "Únete a nuestra comunidad de desarrolladores y comienza a construir proyectos increíbles hoy.",
           "cta.button": "Únete Ahora",
@@ -308,7 +410,7 @@ i18n
           "footer.language": "Idioma",
           
           "footer.copyright": "© 2024 BridgeHub. Todos los derechos reservados.",
-          "footer.madeWith": "Hecho con ❤️ por desarrolladores para desarrolladores",
+          "footer.madeBy": "Hecho con ❤️ por desarrolladores para desarrolladores",
 
           // Create Project
           "createProject.title": "Crear Proyecto",

@@ -1,8 +1,34 @@
 import { useState, useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useNavigate } from 'react-router-dom'
-import { Github, Gitlab as GitLab } from 'lucide-react'
-import { useAuth } from '@/contexts/AuthContext'
+import { useAuth } from '@/hooks/useAuth'
+import { z } from 'zod'
+
+const loginSchema = z.object({
+  email: z.string().email('auth.error.invalidEmail'),
+  password: z.string().min(6, 'auth.error.passwordLength')
+})
+
+const registerSchema = z.object({
+  email: z.string().email('auth.error.invalidEmail'),
+  password: z.string()
+    .min(6, 'auth.error.passwordLength')
+    .regex(/[A-Z]/, 'auth.error.passwordUppercase')
+    .regex(/[0-9]/, 'auth.error.passwordNumber'),
+  confirmPassword: z.string(),
+  fullName: z.string().min(2, 'auth.error.fullNameLength'),
+  username: z.string()
+    .min(3, 'auth.error.usernameLength')
+    .regex(/^[a-zA-Z0-9_]+$/, 'auth.error.usernameFormat'),
+  acceptTerms: z.boolean(),
+  acceptNewsletter: z.boolean()
+}).refine((data) => data.password === data.confirmPassword, {
+  message: 'auth.error.passwordMatch',
+  path: ['confirmPassword']
+}).refine((data) => data.acceptTerms, {
+  message: 'auth.error.acceptTerms',
+  path: ['acceptTerms']
+})
 
 export default function Auth() {
   const { t } = useTranslation();
@@ -17,6 +43,7 @@ export default function Auth() {
   const [username, setUsername] = useState('');
   const [acceptTerms, setAcceptTerms] = useState(false);
   const [acceptNewsletter, setAcceptNewsletter] = useState(false);
+  const [errors, setErrors] = useState({});
 
   useEffect(() => {
     if (user) {
@@ -44,20 +71,44 @@ export default function Auth() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setIsLoading(true);
+    setErrors({});
 
     try {
       if (isLogin) {
+        const result = loginSchema.safeParse({ email, password });
+        if (!result.success) {
+          const formattedErrors = {};
+          result.error.issues.forEach(issue => {
+            formattedErrors[issue.path[0]] = t(issue.message);
+          });
+          setErrors(formattedErrors);
+          return;
+        }
+
+        setIsLoading(true);
         const { error } = await signIn({ email, password });
         if (error) throw error;
       } else {
-        if (password !== confirmPassword) {
-          throw new Error(t('auth.error.passwordMatch'));
+        const result = registerSchema.safeParse({
+          email,
+          password,
+          confirmPassword,
+          fullName,
+          username,
+          acceptTerms,
+          acceptNewsletter
+        });
+
+        if (!result.success) {
+          const formattedErrors = {};
+          result.error.issues.forEach(issue => {
+            formattedErrors[issue.path[0]] = t(issue.message);
+          });
+          setErrors(formattedErrors);
+          return;
         }
-        if (!acceptTerms) {
-          throw new Error(t('auth.error.acceptTerms'));
-        }
-        
+
+        setIsLoading(true);
         const { error } = await signUp({
           email,
           password,
@@ -129,7 +180,7 @@ export default function Auth() {
                 </button>
               </div>
 
-              <form onSubmit={handleSubmit} className="space-y-4">
+              <form onSubmit={handleSubmit} className="space-y-4" noValidate>
                 {!isLogin && (
                   <>
                     <div className="space-y-2">
@@ -142,8 +193,10 @@ export default function Auth() {
                         onChange={(e) => setFullName(e.target.value)}
                         className="flex h-10 w-full rounded-md border border-input bg-background/50 backdrop-blur-sm px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
                         placeholder="John Doe"
-                        required
                       />
+                      {errors.fullName && (
+                        <p className="text-sm text-red-500 mt-1">{errors.fullName}</p>
+                      )}
                     </div>
                     <div className="space-y-2">
                       <label htmlFor="username" className="text-sm font-medium">
@@ -155,8 +208,10 @@ export default function Auth() {
                         onChange={(e) => setUsername(e.target.value)}
                         className="flex h-10 w-full rounded-md border border-input bg-background/50 backdrop-blur-sm px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
                         placeholder="johndoe"
-                        required
                       />
+                      {errors.username && (
+                        <p className="text-sm text-red-500 mt-1">{errors.username}</p>
+                      )}
                     </div>
                   </>
                 )}
@@ -171,8 +226,10 @@ export default function Auth() {
                     onChange={(e) => setEmail(e.target.value)}
                     className="flex h-10 w-full rounded-md border border-input bg-background/50 backdrop-blur-sm px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
                     placeholder="m@example.com"
-                    required
                   />
+                  {errors.email && (
+                    <p className="text-sm text-red-500 mt-1">{errors.email}</p>
+                  )}
                 </div>
 
                 <div className="space-y-4 md:space-y-0 md:flex md:gap-4">
@@ -186,8 +243,10 @@ export default function Auth() {
                       value={password}
                       onChange={(e) => setPassword(e.target.value)}
                       className="flex h-10 w-full rounded-md border border-input bg-background/50 backdrop-blur-sm px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
-                      required
                     />
+                    {errors.password && (
+                      <p className="text-sm text-red-500 mt-1">{errors.password}</p>
+                    )}
                   </div>
 
                   {!isLogin && (
@@ -201,8 +260,10 @@ export default function Auth() {
                         value={confirmPassword}
                         onChange={(e) => setConfirmPassword(e.target.value)}
                         className="flex h-10 w-full rounded-md border border-input bg-background/50 backdrop-blur-sm px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
-                        required
                       />
+                      {errors.confirmPassword && (
+                        <p className="text-sm text-red-500 mt-1">{errors.confirmPassword}</p>
+                      )}
                     </div>
                   )}
                 </div>
@@ -216,8 +277,10 @@ export default function Auth() {
                           checked={acceptTerms}
                           onChange={(e) => setAcceptTerms(e.target.checked)}
                           className="h-4 w-4 rounded border-input"
-                          required
                         />
+                        {errors.acceptTerms && (
+                          <p className="text-sm text-red-500 mt-1">{errors.acceptTerms}</p>
+                        )}
                         <span className="text-sm">
                           {t('auth.acceptTerms')} <a href="/terms" className="text-[hsl(var(--accent-purple))] hover:underline">{t('auth.termsLink')}</a>
                         </span>
@@ -259,34 +322,28 @@ export default function Auth() {
                   </div>
                 </div>
 
-                <div className="grid grid-cols-3 gap-2">
+                <div className="grid grid-cols-2 gap-2">
                   <button
                     type="button"
                     onClick={() => handleSocialLogin('github')}
                     className="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input bg-[#24292e] hover:bg-[#2f363d] text-white h-10 px-4 py-2"
                   >
-                    <svg className="h-5 w-5" viewBox="0 0 438.549 438.549" fill="currentColor">
+                    GitHub
+                    <svg className="ml-2 h-5 w-5" viewBox="0 0 438.549 438.549" fill="currentColor">
                       <path d="M409.132 114.573c-19.608-33.596-46.205-60.194-79.798-79.8-33.598-19.607-70.277-29.408-110.063-29.408-39.781 0-76.472 9.804-110.063 29.408-33.596 19.605-60.192 46.204-79.8 79.8C9.803 148.168 0 184.854 0 224.63c0 47.78 13.94 90.745 41.827 128.906 27.884 38.164 63.906 64.572 108.063 79.227 5.14.954 8.945.283 11.419-1.996 2.475-2.282 3.711-5.14 3.711-8.562 0-.571-.049-5.708-.144-15.417a2549.81 2549.81 0 01-.144-25.406l-6.567 1.136c-4.187.767-9.469 1.092-15.846 1-6.374-.089-12.991-.757-19.842-1.999-6.854-1.231-13.229-4.086-19.13-8.559-5.898-4.473-10.085-10.328-12.56-17.556l-2.855-6.57c-1.903-4.374-4.899-9.233-8.992-14.559-4.093-5.331-8.232-8.945-12.419-10.848l-1.999-1.431c-1.332-.951-2.568-2.098-3.711-3.429-1.142-1.331-1.997-2.663-2.568-3.997-.572-1.335-.098-2.43 1.427-3.289 1.525-.859 4.281-1.276 8.28-1.276l5.708.853c3.807.763 8.516 3.042 14.133 6.851 5.614 3.806 10.229 8.754 13.846 14.842 4.38 7.806 9.657 13.754 15.846 17.847 6.184 4.093 12.419 6.136 18.699 6.136 6.28 0 11.704-.476 16.274-1.423 4.565-.952 8.848-2.383 12.847-4.285 1.713-12.758 6.377-22.559 13.988-29.41-10.848-1.14-20.601-2.857-29.264-5.14-8.658-2.286-17.605-5.996-26.835-11.14-9.235-5.137-16.896-11.516-22.985-19.126-6.09-7.614-11.088-17.61-14.987-29.979-3.901-12.374-5.852-26.648-5.852-42.826 0-23.035 7.52-42.637 22.557-58.817-7.044-17.318-6.379-36.732 1.997-58.24 5.52-1.715 13.706-.428 24.554 3.853 10.85 4.283 18.794 7.952 23.84 10.994 5.046 3.041 9.089 5.618 12.135 7.708 17.705-4.947 35.976-7.421 54.818-7.421s37.117 2.474 54.823 7.421l10.849-6.849c7.419-4.57 16.18-8.758 26.262-12.565 10.088-3.805 17.802-4.853 23.134-3.138 8.562 21.509 9.325 40.922 2.279 58.24 15.036 16.18 22.559 35.787 22.559 58.817 0 16.178-1.958 30.497-5.853 42.966-3.9 12.471-8.941 22.457-15.125 29.979-6.191 7.521-13.901 13.85-23.131 18.986-9.232 5.14-18.182 8.85-26.84 11.136-8.662 2.286-18.415 4.004-29.263 5.146 9.894 8.562 14.842 22.077 14.842 40.539v60.237c0 3.422 1.19 6.279 3.572 8.562 2.379 2.279 6.136 2.95 11.276 1.995 44.163-14.653 80.185-41.062 108.068-79.226 27.88-38.161 41.825-81.126 41.825-128.906-.01-39.771-9.818-76.454-29.414-110.049z"/>
                     </svg>
                   </button>
                   <button
                     type="button"
-                    onClick={() => handleSocialLogin('gitlab')}
-                    className="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input bg-[#FC6D26] hover:bg-[#E24329] text-white h-10 px-4 py-2"
+                    onClick={() => handleSocialLogin('discord')}
+                    className="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input bg-[#5865F2] hover:bg-[#4752C4] text-white h-10 px-4 py-2"
                   >
-                    <svg className="h-5 w-5" viewBox="0 0 512 512" fill="currentColor">
-                      <path d="M503.5 204.6L502.8 202.8L433.1 21.02C431.7 17.45 429.2 14.43 425.9 12.38C423.5 10.83 420.8 9.865 417.9 9.57C415 9.275 412.2 9.653 409.5 10.68C406.8 11.7 404.4 13.34 402.4 15.46C400.5 17.58 399.1 20.13 398.3 22.9L351.3 166.9H160.8L113.7 22.9C112.9 20.13 111.5 17.59 109.6 15.47C107.6 13.35 105.2 11.72 102.5 10.7C99.86 9.675 96.98 9.295 94.12 9.587C91.26 9.878 88.51 10.83 86.08 12.38C82.84 14.43 80.33 17.45 78.92 21.02L9.267 202.8L8.543 204.6C-1.484 230.8-2.72 259.6 5.023 286.6C12.77 313.5 29.07 337.3 51.47 354.2L51.74 354.4L52.33 354.8L158.3 434.3L210.9 474L242.9 498C246.6 500.8 251.2 502.4 256 502.4C260.8 502.4 265.4 500.8 269.1 498L301.1 474L353.7 434.3L460.2 354.4L460.5 354.1C482.9 337.2 499.2 313.5 506.1 286.6C514.7 259.6 513.5 230.8 503.5 204.6z"/>
+                    Discord
+                    <svg className="ml-2 h-5 w-5" viewBox="0 0 24 24" fill="currentColor">
+                      <path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028 14.09 14.09 0 0 0 1.226-1.994.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/>
                     </svg>
                   </button>
-                  <button
-                    type="button"
-                    onClick={() => handleSocialLogin('bitbucket')}
-                    className="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input bg-[#0052CC] hover:bg-[#0747A6] text-white h-10 px-4 py-2"
-                  >
-                    <svg className="h-5 w-5" viewBox="0 0 24 24" fill="currentColor">
-                      <path d="M.778 1.213a.768.768 0 00-.768.892l3.263 19.81c.084.5.515.868 1.022.868H19.95a.772.772 0 00.77-.644l3.262-20.034a.768.768 0 00-.768-.892H.778zM14.52 15.53H9.522L8.17 8.466h7.561L14.52 15.53z"/>
-                    </svg>
-                  </button>
+  
                 </div>
               </form>
             </div>

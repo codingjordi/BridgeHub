@@ -14,22 +14,11 @@ export function LanguageToggle() {
     i18n.changeLanguage(value);
   };
 
-  const getLanguageLabel = (lang) => {
-    switch (lang) {
-      case 'es':
-        return 'ES';
-      case 'en':
-        return 'EN';
-      default:
-        return lang.toUpperCase();
-    }
-  };
-
   return (
     <Select value={i18n.language} onValueChange={handleLanguageChange}>
-      <SelectTrigger className="w-[80px] border-none bg-transparent hover:bg-transparent focus:ring-0 focus-visible:ring-0 focus:ring-offset-0 focus-visible:ring-offset-0">
+      <SelectTrigger className="border-none bg-transparent hover:bg-transparent focus:ring-0 focus-visible:ring-0 focus:ring-offset-0 focus-visible:ring-offset-0">
         <SelectValue>
-          {getLanguageLabel(i18n.language)}
+          {i18n.language.toUpperCase()}
         </SelectValue>
       </SelectTrigger>
       <SelectContent>

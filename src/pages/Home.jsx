@@ -2,6 +2,8 @@ import { Link } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { Code2, Users, Briefcase, CheckCircle2, ArrowRight } from 'lucide-react'
 import { useEffect } from 'react'
+import StepCard from '../components/StepCard';
+import BenefitCard from '../components/BenefitCard';
 
 export default function Home() {
   const { t } = useTranslation();
@@ -26,7 +28,7 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-background">
-      {/* Hero Section */}
+      {/* Hero */}
       <section className="relative py-20 px-4 overflow-hidden">
         <div className="hero-grid absolute inset-0"></div>
         <div className="max-w-4xl mx-auto relative">
@@ -56,57 +58,22 @@ export default function Home() {
 
 
 
-      {/* Benefits Section */}
+      {/* Benefits */}
       <section className="py-16 px-4 bg-muted/50">
         <div className="max-w-6xl mx-auto">
           <h2 className="text-3xl font-bold text-center mb-12 bg-clip-text text-transparent bg-gradient-to-r from-[hsl(var(--accent-purple))] to-[hsl(var(--accent-blue))]">
             {t('benefits.title')}
           </h2>
           <div className="grid md:grid-cols-2 gap-8">
-            <div className="feature-card rounded-lg border bg-card text-card-foreground shadow-sm p-6">
-              <div className="flex gap-4 items-start">
-                <CheckCircle2 className="w-6 h-6 text-[hsl(var(--accent-purple))] mt-1" />
-                <div>
-                  <h3 className="text-xl font-semibold mb-2">{t('benefits.practical.title')}</h3>
-                  <p className="text-muted-foreground">{t('benefits.practical.description')}</p>
-                </div>
-              </div>
-            </div>
-            <div className="feature-card rounded-lg border bg-card text-card-foreground shadow-sm p-6">
-              <div className="flex gap-4 items-start">
-                <CheckCircle2 className="w-6 h-6 text-[hsl(var(--accent-blue))] mt-1" />
-                <div>
-                  <h3 className="text-xl font-semibold mb-2">{t('benefits.networking.title')}</h3>
-                  <p className="text-muted-foreground">{t('benefits.networking.description')}</p>
-                </div>
-              </div>
-            </div>
-            <div className="feature-card rounded-lg border bg-card text-card-foreground shadow-sm p-6">
-              <div className="flex gap-4 items-start">
-                <CheckCircle2 className="w-6 h-6 text-[hsl(var(--accent-cyan))] mt-1" />
-                <div>
-                  <h3 className="text-xl font-semibold mb-2">{t('benefits.portfolio.title')}</h3>
-                  <p className="text-muted-foreground">{t('benefits.portfolio.description')}</p>
-                </div>
-              </div>
-            </div>
-            <div className="feature-card rounded-lg border bg-card text-card-foreground shadow-sm p-6">
-              <div className="flex gap-4 items-start">
-                <CheckCircle2 className="w-6 h-6 text-[hsl(var(--accent-purple))] mt-1" />
-                <div>
-                  <h3 className="text-xl font-semibold mb-2">{t('benefits.learning.title')}</h3>
-                  <p className="text-muted-foreground">{t('benefits.learning.description')}</p>
-                </div>
-              </div>
-            </div>
+            <BenefitCard benefitNumber={1} checkColor={'text-[hsl(var(--accent-purple))]'} />
+            <BenefitCard benefitNumber={2} checkColor={'text-[hsl(var(--accent-blue))]'} />
+            <BenefitCard benefitNumber={3} checkColor={'text-[hsl(var(--accent-blue))]'} />
+            <BenefitCard benefitNumber={4} checkColor={'text-[hsl(var(--accent-purple))]'} /> 
           </div>
         </div>
       </section>
 
-      
-      
-
-      {/* How It Works Section */}
+      {/* How it works  */}
       <section className="py-16 px-4 bg-background">
         <div className="max-w-6xl mx-auto">
           <h2 className="text-3xl font-bold text-center mb-12 bg-clip-text text-transparent bg-gradient-to-r from-[hsl(var(--accent-purple))] to-[hsl(var(--accent-blue))]">
@@ -114,25 +81,13 @@ export default function Home() {
           </h2>
           <div className="grid md:grid-cols-3 gap-8">
             <div className="relative">
-              <div className="feature-card rounded-lg border bg-card text-card-foreground shadow-sm p-6">
-                <div className="w-12 h-12 rounded-full bg-[hsl(var(--accent-purple))] text-white flex items-center justify-center text-xl font-bold mb-4">1</div>
-                <h3 className="text-xl font-semibold mb-2">{t('howItWorks.step1.title')}</h3>
-                <p className="text-muted-foreground">{t('howItWorks.step1.description')}</p>
-              </div>
-              
+              <StepCard stepNumber={1} backgroundColor={'bg-[hsl(var(--accent-purple))]'}/>
             </div>
             <div className="relative">
-              <div className="feature-card rounded-lg border bg-card text-card-foreground shadow-sm p-6">
-                <div className="w-12 h-12 rounded-full bg-[hsl(var(--accent-blue))] text-white flex items-center justify-center text-xl font-bold mb-4">2</div>
-                <h3 className="text-xl font-semibold mb-2">{t('howItWorks.step2.title')}</h3>
-                <p className="text-muted-foreground">{t('howItWorks.step2.description')}</p>
-              </div>
-              
+              <StepCard stepNumber={2} backgroundColor={'bg-[hsl(var(--accent-blue))]'}/>
             </div>
-            <div className="feature-card rounded-lg border bg-card text-card-foreground shadow-sm p-6">
-              <div className="w-12 h-12 rounded-full bg-[hsl(var(--accent-cyan))] text-white flex items-center justify-center text-xl font-bold mb-4">3</div>
-              <h3 className="text-xl font-semibold mb-2">{t('howItWorks.step3.title')}</h3>
-              <p className="text-muted-foreground">{t('howItWorks.step3.description')}</p>
+            <div className="relative">
+              <StepCard stepNumber={3} backgroundColor={'bg-[hsl(var(--accent-cyan))]'}/>
             </div>
           </div>
         </div>
@@ -140,7 +95,7 @@ export default function Home() {
 
       
 
-      {/* CTA Section */}
+      {/* CTA */}
       <section className="py-20 px-4 bg-background relative overflow-hidden">
         <div className="hero-grid absolute inset-0"></div>
         <div className="max-w-4xl mx-auto text-center relative">

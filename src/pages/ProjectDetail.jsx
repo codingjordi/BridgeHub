@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { useAuth } from '@/contexts/AuthContext';
-import { supabase } from '@/lib/supabase';
+import { useAuth } from '@/hooks/useAuth';
+import { supabase } from '@/services/supabase';
 import { Users, Calendar, MapPin, ArrowLeft, Edit2, UserMinus } from 'lucide-react';
 import { useToast } from "@/components/ui/use-toast";
 
@@ -298,7 +298,7 @@ export default function ProjectDetail() {
     );
   }
 
-  if (!project) {
+  /* if (!project) {
     return (
       <div className="min-h-screen bg-background flex items-center justify-center">
         <div className="text-center">
@@ -307,7 +307,7 @@ export default function ProjectDetail() {
         </div>
       </div>
     );
-  }
+  } */
 
   const isOwner = userProfile?.id === project?.owner?.id;
 
@@ -320,14 +320,17 @@ export default function ProjectDetail() {
             className="text-muted-foreground hover:text-foreground inline-flex items-center"
           >
             <ArrowLeft className="w-4 h-4 mr-2" />
-            Back to Projects
+            {t('project.details.back')}
           </button>
         </div>
 
         <div className="space-y-8">
           <div className="flex justify-between items-start">
             <div>
+              <div className='md:max-w-[600px] lg:w-full'>
               <h1 className="text-3xl font-bold mb-2">{project.title}</h1>
+
+              </div>
               <div className="flex items-center gap-4 text-muted-foreground">
                 <Link 
                   to={`/profile/${project.owner.username}`}
@@ -352,7 +355,7 @@ export default function ProjectDetail() {
                 className="btn-gradient text-white inline-flex items-center justify-center rounded-md text-sm font-medium h-10 px-4"
               >
                 <Edit2 className="w-4 h-4 mr-2" />
-                Edit Project
+                {t('project.details.edit')}
               </button>
             )}
           </div>
@@ -360,12 +363,12 @@ export default function ProjectDetail() {
           <div className="grid md:grid-cols-3 gap-6">
             <div className="md:col-span-2 space-y-6">
               <div className="feature-card rounded-lg border bg-card p-6">
-                <h2 className="text-xl font-semibold mb-4">Description</h2>
+                <h2 className="text-xl font-semibold mb-4">{t('project.details.description')}</h2>
                 <p className="text-muted-foreground whitespace-pre-wrap">{project.description}</p>
               </div>
 
               <div className="feature-card rounded-lg border bg-card p-6">
-                <h2 className="text-xl font-semibold mb-4">Required Skills</h2>
+                <h2 className="text-xl font-semibold mb-4">{t('project.details.required.skills')}</h2>
                 <div className="flex flex-wrap gap-2">
                   {project.skills_required.split(',').map((skill) => (
                     <span
@@ -379,13 +382,13 @@ export default function ProjectDetail() {
               </div>
 
               <div className="feature-card rounded-lg border bg-card p-6">
-                <h2 className="text-xl font-semibold mb-4">Team Members</h2>
+                <h2 className="text-xl font-semibold mb-4">{t('project.details.team.members')}</h2>
                 {loadingMembers ? (
                   <div className="flex justify-center py-4">
                     <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-[hsl(var(--accent-purple))]"></div>
                   </div>
                 ) : members.length === 0 ? (
-                  <p className="text-muted-foreground text-center py-4">No team members yet</p>
+                  <p className="text-muted-foreground text-center py-4">{t('project.details.team.empty')}</p>
                 ) : (
                   <div className="space-y-4">
                     {members.map((member) => (
@@ -421,13 +424,13 @@ export default function ProjectDetail() {
 
               {isOwner && (
                 <div className="feature-card rounded-lg border bg-card p-6">
-                  <h2 className="text-xl font-semibold mb-4">Applications</h2>
+                  <h2 className="text-xl font-semibold mb-4">{t('project.details.applications')}</h2>
                   {loadingApplications ? (
                     <div className="flex justify-center py-4">
                       <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-[hsl(var(--accent-purple))]"></div>
                     </div>
                   ) : applications.length === 0 ? (
-                    <p className="text-muted-foreground text-center py-4">No applications yet</p>
+                    <p className="text-muted-foreground text-center py-4">{t('project.details.applications.empty')}</p>
                   ) : (
                     <div className="space-y-4">
                       {applications.map((application) => (
@@ -454,13 +457,13 @@ export default function ProjectDetail() {
                                     onClick={() => handleApplicationStatus(application.id, 'accepted')}
                                     className="px-3 py-1 bg-green-500 text-white rounded-md text-sm hover:bg-green-600"
                                   >
-                                    Accept
+                                    {t('project.details.applications.accept')}
                                   </button>
                                   <button
                                     onClick={() => handleApplicationStatus(application.id, 'rejected')}
                                     className="px-3 py-1 bg-red-500 text-white rounded-md text-sm hover:bg-red-600"
                                   >
-                                    Reject
+                                    {t('project.details.applications.reject')}
                                   </button>
                                 </>
                               ) : (
@@ -488,19 +491,19 @@ export default function ProjectDetail() {
 
             <div className="space-y-6">
               <div className="feature-card rounded-lg border bg-card p-6">
-                <h2 className="text-xl font-semibold mb-4">Details</h2>
+                <h2 className="text-xl font-semibold mb-4">{t('project.details.details.title')}</h2>
                 <div className="space-y-4">
                   <div className="flex items-center gap-2 text-muted-foreground">
                     <Users className="w-5 h-5" />
                     <div>
-                      <p className="text-foreground font-medium">Team Size</p>
-                      <p className="text-sm">Up to {project.max_members} members</p>
+                      <p className="text-foreground font-medium">{t('project.details.details.team.size')}</p>
+                      <p className="text-sm">{t('project.details.details.max.members', { max_members: project.max_members } )}</p>
                     </div>
                   </div>
                   <div className="flex items-center gap-2 text-muted-foreground">
                     <MapPin className="w-5 h-5" />
                     <div>
-                      <p className="text-foreground font-medium">Modality</p>
+                      <p className="text-foreground font-medium">{t('project.details.modality')}</p>
                       <p className="text-sm capitalize">{project.modality}</p>
                     </div>
                   </div>
@@ -517,19 +520,19 @@ export default function ProjectDetail() {
                     onClick={() => setShowApplicationModal(true)}
                     className="w-full btn-gradient text-white inline-flex items-center justify-center rounded-md text-sm font-medium h-10"
                   >
-                    Apply to Project
+                    {t('project.details.applications.apply')}
                   </button>
                 )
               )}
 
               {!userProfile && (
                 <div className="text-center p-4 border rounded-lg bg-muted">
-                  <p className="text-sm text-muted-foreground mb-2">Sign in to apply for this project</p>
+                  <p className="text-sm text-muted-foreground mb-2">{t('project.details.applications.sign.in.title')}</p>
                   <Link
                     to="/auth"
                     className="text-sm text-[hsl(var(--accent-purple))] hover:underline"
                   >
-                    Sign in now
+                    {t('project.details.applications.sign.in.button')}
                   </Link>
                 </div>
               )}
@@ -542,22 +545,22 @@ export default function ProjectDetail() {
         <div className="fixed inset-0 bg-background/80 backdrop-blur-sm z-50">
           <div className="fixed left-[50%] top-[50%] z-50 grid w-full max-w-lg translate-x-[-50%] translate-y-[-50%] gap-4 border bg-background p-6 shadow-lg duration-200 sm:rounded-lg">
             <div className="flex flex-col space-y-1.5 text-center sm:text-left">
-              <h2 className="text-lg font-semibold leading-none tracking-tight">Apply to Project</h2>
+              <h2 className="text-lg font-semibold leading-none tracking-tight">{t('project.details.applications.modal.title')}</h2>
               <p className="text-sm text-muted-foreground">
-                Tell the project owner why you would be a good fit for this project
+                {t('project.details.applications.modal.description')}
               </p>
             </div>
             <form onSubmit={handleApply} className="space-y-4">
               <div className="space-y-2">
                 <label htmlFor="application-text" className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
-                  Your Application
+                  {t('project.details.applications.modal.text.label')}
                 </label>
                 <textarea
                   id="application-text"
                   value={applicationText}
                   onChange={(e) => setApplicationText(e.target.value)}
                   className="flex min-h-[120px] w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
-                  placeholder="Describe your experience and why you're interested in this project..."
+                  placeholder={t('project.details.applications.modal.text.placeholder')}
                   required
                 />
               </div>
@@ -567,14 +570,14 @@ export default function ProjectDetail() {
                   onClick={() => setShowApplicationModal(false)}
                   className="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-10 px-4"
                 >
-                  Cancel
+                  {t('project.details.applications.modal.cancel')}
                 </button>
                 <button
                   type="submit"
                   disabled={submitting}
                   className="btn-gradient text-white inline-flex items-center justify-center rounded-md text-sm font-medium h-10 px-4"
                 >
-                  {submitting ? 'Submitting...' : 'Submit Application'}
+                  {submitting ? t('project.details.applications.modal.submitting') : t('project.details.applications.modal.submit')}
                 </button>
               </div>
             </form>

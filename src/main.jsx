@@ -1,20 +1,20 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-import { BrowserRouter } from 'react-router-dom'
-import { ThemeProvider } from './components/theme-provider'
-import { AuthProvider } from './contexts/AuthContext'
+import { ThemeProvider } from './contexts/ThemeContext'
 import App from './App'
 import './i18n/config'
+import { AuthProvider } from './contexts/AuthContext'
 import './index.css'
+import { ProfileProvider } from './contexts/ProfileContext'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <BrowserRouter>
+    <ProfileProvider>
       <AuthProvider>
-        <ThemeProvider defaultTheme="system" storageKey="devcollab-theme">
+        <ThemeProvider defaultTheme="system" storageKey="bridgehub-theme">
           <App />
         </ThemeProvider>
       </AuthProvider>
-    </BrowserRouter>
+    </ProfileProvider>
   </React.StrictMode>,
 )

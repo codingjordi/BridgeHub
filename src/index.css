@@ -25,7 +25,6 @@
     --ring: 222.2 84% 4.9%;
     --radius: 0.5rem;
 
-    /* Colores para acentos y efectos */
     --accent-purple: 250 95% 65%;
     --accent-blue: 210 100% 65%;
     --accent-cyan: 190 95% 65%;
@@ -56,7 +55,6 @@
     --input: 0 0% 14.9%;
     --ring: 0 0% 83.1%;
 
-    /* Colores para acentos y efectos en modo oscuro */
     --accent-purple: 250 70% 55%;
     --accent-blue: 210 80% 55%;
     --accent-cyan: 190 70% 55%;
@@ -76,7 +74,7 @@
   }
 }
 
-/* Animación del grid del hero */
+/* Hero section grid effect */
 .hero-grid {
   background-image: linear-gradient(to right, hsl(var(--grid-color)) 1px, transparent 1px),
                     linear-gradient(to bottom, hsl(var(--grid-color)) 1px, transparent 1px);
@@ -84,6 +82,7 @@
   mask-image: radial-gradient(circle at center, black 30%, transparent 70%);
 }
 
+/* Animacion de los circulos de colores */
 .hero-grid::before {
   content: '';
   position: absolute;
@@ -108,7 +107,7 @@
   pointer-events: none;
 }
 
-/* Estilos para las cards */
+/* Estilos para las cards de la home */
 .feature-card {
   position: relative;
   overflow: hidden;
@@ -133,7 +132,7 @@
   opacity: 1;
 }
 
-/* Estilos para los botones */
+/* styles para los botones con degradau */
 .btn-gradient {
   background: linear-gradient(
     to right,
