@@ -1,6 +1,6 @@
 # BridgeHub
 
-BridgeHub is a modern web application built with React and Vite, designed to facilitate collaboration and project management.
+BridgeHub is a modern web application designed to facilitate collaboration between developers, UI/UX designers, data professionals and other tech related enthusiastics.
 
 ## Technologies Used
 
