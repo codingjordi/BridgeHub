@@ -1,3 +1,6 @@
+[![i-Phone-16-pro-mockup-on-the-bench-isometric.jpg](https://i.postimg.cc/1zC7XVy0/i-Phone-16-pro-mockup-on-the-bench-isometric.jpg)](https://postimg.cc/WDZwf3Ft)
+
+
 # BridgeHub
 
 BridgeHub is a modern web application designed to facilitate collaboration between developers, UI/UX designers, data professionals and other tech related enthusiastics.

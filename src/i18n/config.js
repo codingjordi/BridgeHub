@@ -63,7 +63,7 @@ i18n
           "authenticatedHome.stats.teamworkRating": "Teamwork Rating",
           "authenticatedHome.stats.skillsGained": "Skills Gained",
 
-          "authenticatedHome.activeProjects.title": "Active Projects",
+          "authenticatedHome.activeProjects.title": "Your Current Projects",
           "authenticatedHome.activeProjects.viewAll": "View all projects",
           "authenticatedHome.activeProjects.new": "new",
           "authenticatedHome.activeProjects.progress": "Progress",
@@ -277,8 +277,8 @@ i18n
           "authenticatedHome.stats.teamworkRating": "Valoración de Trabajo en Equipo",
           "authenticatedHome.stats.skillsGained": "Habilidades Adquiridas",
 
-          "authenticatedHome.activeProjects.title": "Proyectos Activos",
-          "authenticatedHome.activeProjects.viewAll": "Ver todos los proyectos",
+          "authenticatedHome.activeProjects.title": "Tus proyectos en curso",
+          "authenticatedHome.activeProjects.viewAll": "Explora todos los proyectos activos",
           "authenticatedHome.activeProjects.new": "nuevo",
           "authenticatedHome.activeProjects.progress": "Progreso",
           "authenticatedHome.activeProjects.nextDeadline": "Próxima fecha límite",
