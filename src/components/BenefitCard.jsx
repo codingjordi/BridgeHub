@@ -18,5 +18,3 @@ export default function BenefitCard({ benefitNumber, checkColor }) {
             </div>
     );
 }
-
-// text-[hsl(var(--accent-purple))]

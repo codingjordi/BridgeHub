@@ -14,8 +14,8 @@ export default function ProjectCard({ project }) {
                 onClick={() => navigate(`/projects/${project.id}`)}
               >
                 <div className="p-6">
-                  <h3 className="text-xl font-semibold mb-2">{project.title}</h3>
-                  <p className="text-muted-foreground mb-4 line-clamp-2">{project.description}</p>
+                  <h3 className="min-h-[56px] text-xl font-semibold mb-2">{project.title}</h3>
+                  <p className="min-h-[48px] text-muted-foreground mb-4 line-clamp-2">{project.description}</p>
                   <div className="space-y-4">
                     <div>
                       <p className="text-sm font-medium mb-1">{t('projects.technologies')}</p>

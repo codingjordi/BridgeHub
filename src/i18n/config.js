@@ -86,6 +86,7 @@ i18n
           "projects.title": "Projects",
           "projects.create": "Create Project",
           "projects.search": "Search projects...",
+          "projects.noProjects": "No project match your search",
           "projects.filter.technology": "Technology",
           "projects.filter.role": "Role",
           "projects.apply": "Apply",
@@ -197,7 +198,7 @@ i18n
           "footer.language": "Language",
           
           "footer.copyright": "© 2024 BridgeHub. All rights reserved.",
-          "footer.madeBy": "Made with ❤️ by developers for developers",
+          "footer.madeBy": "Made with ❤️ by <code><a>codingjordi</a></code>",
 
           // Create Project
           "createProject.title": "Create Project",
@@ -299,6 +300,7 @@ i18n
           "projects.title": "Proyectos",
           "projects.create": "Crear Proyecto",
           "projects.search": "Buscar proyectos...",
+          "projects.noProjects": "Ningún proyecto coincide con tu búsqueda",
           "projects.filter.technology": "Tecnología",
           "projects.filter.role": "Rol",
           "projects.apply": "Aplicar",
@@ -431,7 +433,7 @@ i18n
           "footer.language": "Idioma",
           
           "footer.copyright": "© 2024 BridgeHub. Todos los derechos reservados.",
-          "footer.madeBy": "Hecho con ❤️ por desarrolladores para desarrolladores",
+          "footer.madeBy": "Hecho con ❤️ por <code><a>codingjordi</a></code>",
 
           // Create Project
           "createProject.title": "Crear Proyecto",
