@@ -147,7 +147,7 @@ export default function Auth() {
       <div className="relative min-h-[calc(100vh-73px)] flex items-center justify-center p-4">
         <div className="hero-grid absolute inset-0"></div>
         <div className="w-full max-w-md relative">
-          <div className="feature-card rounded-lg border bg-card/80 backdrop-blur-sm text-card-foreground shadow-lg">
+          <div className=" rounded-lg border bg-card/80 backdrop-blur-sm text-card-foreground shadow-lg">
             <div className="p-6 space-y-1">
               <h1 className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-[hsl(var(--accent-purple))] to-[hsl(var(--accent-blue))]">
                 {t('auth.welcome')}
