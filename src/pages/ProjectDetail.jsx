@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { useAuth } from '@/hooks/useAuth';
 import { supabase } from '@/services/supabase';
 import { Users, Calendar, MapPin, ArrowLeft, Edit2, UserMinus } from 'lucide-react';
-import { useToast } from "@/components/ui/use-toast";
+import { useToast } from "@/hooks/useToast";
 
 export default function ProjectDetail() {
   const { t } = useTranslation();

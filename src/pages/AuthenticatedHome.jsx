@@ -82,7 +82,7 @@ export default function AuthenticatedHome() {
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           <div className="lg:col-span-2 space-y-6">
             <div className="flex justify-between items-center">
-              <h2 className="text-2xl font-bold">{t('authenticatedHome.activeProjects.title')}</h2>
+              <h2 className="text-2xl font-bold ml-1">{t('authenticatedHome.activeProjects.title')}</h2>
               <Link 
                 to="/projects" 
                 className="text-sm text-muted-foreground hover:text-foreground flex items-center gap-2"
@@ -136,7 +136,7 @@ export default function AuthenticatedHome() {
           </div>
 
           <div className="space-y-6">
-            <h2 className="text-2xl font-bold">{t('authenticatedHome.recentActivity.title')}</h2>
+            <h2 className="text-2xl font-bold ml-1">{t('authenticatedHome.recentActivity.title')}</h2>
             <div className="feature-card rounded-lg border bg-card text-card-foreground p-6">
               <div className="space-y-6">
                 {recentActivity.map(activity => (
@@ -158,7 +158,7 @@ export default function AuthenticatedHome() {
         </div>
 
         <div className="space-y-6">
-          <h2 className="text-2xl font-bold">{t('authenticatedHome.recommendedProjects.title')}</h2>
+          <h2 className="text-2xl font-bold ml-1">{t('authenticatedHome.recommendedProjects.title')}</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {recommendedProjects.map(project => (
               <div key={project.id} className="feature-card rounded-lg border bg-card text-card-foreground p-6">

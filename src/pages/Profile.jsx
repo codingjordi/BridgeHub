@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { useAuth } from '@/hooks/useAuth';
 import { supabase } from '@/services/supabase';
 import { Github, Linkedin, Disc as Discord, Edit2, Calendar, MapPin, Link as LinkIcon, Star, Users, Briefcase } from 'lucide-react';
-import { useToast } from "@/components/ui/use-toast";
+import { useToast } from "@/hooks/useToast";
 
 export default function Profile() {
   const { t } = useTranslation();

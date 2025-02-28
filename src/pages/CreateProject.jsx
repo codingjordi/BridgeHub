@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { useAuth } from '@/hooks/useAuth';
 import { supabase } from '@/services/supabase';
-import { useToast } from "@/components/ui/use-toast";
+import { useToast } from "@/hooks/useToast";
 
 export default function CreateProject() {
   const { t } = useTranslation();
