@@ -7,7 +7,7 @@ export const ProfileContext = createContext(null);
 export function ProfileProvider({children}) {
     const [userProfile, setUserProfile] = useState(null);
     const [isLoading, setIsLoading] = useState(true);
-    const {user} = useAuth()
+    const {user} = useAuth() || {}
 
     const fetchUserProfile = async () => {
         try {
