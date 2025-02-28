@@ -122,7 +122,6 @@ export default function Auth() {
         });
         if (error) throw error;
         
-        alert(t('auth.error.emailVerification'));
       }
     } catch (error) {
       console.error('Error:', error);
