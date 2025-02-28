@@ -1,6 +1,13 @@
 import { useTranslation } from "react-i18next";
 
 export default function StepCard({ stepNumber, backgroundColor }) {
+    // Validate prop types
+    if (typeof stepNumber !== 'number' || typeof backgroundColor !== 'string') {
+        throw new Error('backgroundColor must be a string and stepNumber must be a number');
+    }
+    if (stepNumber < 1 || stepNumber > 3) {
+        throw new Error('stepNumber must be a number between 1 and 3');
+    }
 
     const { t } = useTranslation();
 
