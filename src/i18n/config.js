@@ -55,7 +55,7 @@ i18n
           "auth.error.usernameFormat": "Username can only contain letters, numbers and underscores",
 
           // AuthenticatedHome
-          "authenticatedHome.welcome": "Welcome back, {{name}}!",
+          "authenticatedHome.welcome": "Howdy, {{name}}!",
           "authenticatedHome.summary": "Here's what's happening with your projects",
           
           "authenticatedHome.stats.completedProjects": "Completed Projects",
@@ -269,7 +269,7 @@ i18n
           "auth.error.usernameFormat": "El nombre de usuario solo puede contener letras, números y guiones bajos",
 
           // AuthenticatedHome
-          "authenticatedHome.welcome": "¡Bienvenido de nuevo, {{name}}!",
+          "authenticatedHome.welcome": "¡Aloha, {{name}}!",
           "authenticatedHome.summary": "Esto es lo que está pasando con tus proyectos",
           
           "authenticatedHome.stats.completedProjects": "Proyectos Completados",
