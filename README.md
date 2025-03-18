@@ -83,11 +83,15 @@ BridgeHub is a modern web application designed to facilitate collaboration betwe
 
 - Multi-language support
 
-- Theme customization
+- User profile customization + social links (GitHub, Discord and LinkedIn)
 
-- Responsive design
+- Create a project post
 
-- Protected routes
+- Apply to an already created group project
+
+- Reject user's applications
+
+- Filter projects by technology/position
 
 - Project management capabilities
 
