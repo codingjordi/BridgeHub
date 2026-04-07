@@ -21,9 +21,7 @@ BridgeHub is a modern web application designed to facilitate collaboration betwe
 ### UI Components & Styling
 
 - **Radix UI** (components)
-  
-- **Shadcn UI** (components)
-  
+    
 - **Lucide React** (Icons)
   
 - **TailwindCSS** and Tailwind Animations
